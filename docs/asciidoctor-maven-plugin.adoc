@@ -2,8 +2,9 @@
 :doctitle: Asciidoctor Maven Plugin
 :revnumber: 1.5.6
 :gitref: asciidoctor-maven-plugin-{revnumber}
-:page-layout: docs
 :keywords: Maven Plugin, build tool, AsciidoctorJ, Asciidoctor, AsciiDoc, JVM
+:page-keywords: {keywords}
+:page-layout: docs
 include::https://rawgit.com/asciidoctor/asciidoctor-maven-plugin/master/README.adoc[]
 //include::https://cdn.rawgit.com/asciidoctor/asciidoctor-maven-plugin/{gitref}/README.adoc[]
 
@@ -11,6 +12,6 @@ include::https://rawgit.com/asciidoctor/asciidoctor-maven-plugin/master/README.a
 == Resources and Help
 
 If you're interested in modifying or impoving this plugin, checkout the link:/docs/hack-asciidoctor-maven-plugin[Hacking on the Asciidoctor Maven plugin guide].
-To file an issue regarding this plugin, visit the http://github.com/asciidoctor/asciidoctor-maven-plugin/issues[plugin's issue tracker].
+To report an issue with this plugin, please use the http://github.com/asciidoctor/asciidoctor-maven-plugin/issues[issue tracker].
 
 Also, don't forget to join the http://discuss.asciidoctor.org[Asciidoctor discussion list], where you can ask questions and leave comments.
