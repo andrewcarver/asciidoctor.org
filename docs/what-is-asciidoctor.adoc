@@ -18,11 +18,11 @@ Asciidoctor is open source, made available under the MIT license.
 The Asciidoctor RubyGem is published to http://rubygems.org/gems/asciidoctor[rubygems.org] and can also be installed on several popular Linux distributions using one of the provided packages.
 The git repositories for the project are hosted under the {gh-org}[Asciidoctor organization on GitHub] to encourage the widest participation.
 
-While Asciidoctor aims to offer full compliance with the AsciiDoc syntax implemented by AsciiDoc Python (http://asciidoctor.org/docs/asciidoc-asciidoctor-diffs[with some exceptions]), it's far more than just a clone of AsciiDoc Python.
+While Asciidoctor aims to offer full compliance with the AsciiDoc syntax implemented by AsciiDoc Python (https://asciidoctor.org/docs/asciidoc-asciidoctor-diffs[with some exceptions]), it's far more than just a clone of AsciiDoc Python.
 
 == What's unique about the Asciidoctor implementation?
 
-Asciidoctor converts AsciiDoc source files and strings to HTML 5, DocBook 4.5 and other formats, including HTML 5 presentations (deck.js, dzslides).
+Asciidoctor converts AsciiDoc source files and strings to HTML 5, DocBook 4.5 and other formats, including HTML 5 presentations (reveal.js, Bespoke.js, etc).
 
 What follows are highlights of its most notable features.
 
@@ -55,5 +55,5 @@ The Asciidoctor cli, link:/man/asciidoctor/[`asciidoctor`], is a drop-in replace
 
 == System requirements
 
-Asciidoctor is published as a RubyGem and currently works with Ruby 1.8.7, Ruby 1.9.3, Ruby 2 (2.0.0 or better), JRuby 1.7, JRuby 9000 and Rubinius 2 (2.0 or better) on Linux, OS X (aka Mac OS X) and Windows.
+Asciidoctor is published as a RubyGem and currently works with Ruby 1.8.7, Ruby 1.9.3, Ruby 2 (2.0.0 or better), JRuby 1.7, JRuby 9000 and Rubinius 2 (2.0 or better) on Linux, macOS and Windows.
 We expect it will work with other versions of Ruby as well.

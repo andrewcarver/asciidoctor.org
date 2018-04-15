@@ -20,28 +20,33 @@ ifndef::env-site[]
 endif::[]
 :linkattrs:
 // URLs
-:docs: http://asciidoctor.org/docs
-:user: {docs}/user-manual
+:docs: link:../
+ifdef::env-github[:docs: https://asciidoctor.org/docs/]
+:user: {docs}user-manual/
+ifdef::env-browser[]
+:docs: link:index.adoc
+:user: link:user-manual.adoc
+endif::[]
 :uri-config: https://github.com/asciidoctor/asciidoctor/blob/master/compat/asciidoc.conf
 :uri-fontawesome: http://fortawesome.github.io/Font-Awesome/
-:uri-icon-in: {user}/#inline-icons
-:uri-icon-attrs: {user}/#size-rotate-and-flip
-:uri-video: {user}/#video
-:uri-checklist: {user}/#checklist
-:uri-marker: {user}/#custom-markers
-:uri-list-num: {user}/#numbering-styles
-:uri-imagesdir: {user}/#set-the-images-directory
-:uri-image-attrs: {user}/#putting-images-in-their-place
-:uri-toc: {user}/#user-toc
-:uri-para: {user}/#paragraph
-:uri-literal: {user}/#literal-text-and-blocks
-:uri-admon: {user}/#admonition
-:uri-bold: {user}/#bold-and-italic
-:uri-quote: {user}/#curved
-:uri-sub: {user}/#subscript-and-superscript
-:uri-mono: {user}/#mono
-:uri-css: {user}/#custom-styling-with-attributes
-:uri-pass: {user}/#pass-macros
+:uri-icon-in: {user}#inline-icons
+:uri-icon-attrs: {user}#size-rotate-and-flip
+:uri-video: {user}#video
+:uri-checklist: {user}#checklist
+:uri-marker: {user}#custom-markers
+:uri-list-num: {user}#numbering-styles
+:uri-imagesdir: {user}#setting-the-location-of-images
+:uri-image-attrs: {user}#putting-images-in-their-place
+:uri-toc: {user}#user-toc
+:uri-para: {user}#paragraph
+:uri-literal: {user}#literal-text-and-blocks
+:uri-admon: {user}#admonition
+:uri-bold: {user}#bold-and-italic
+:uri-quote: {user}#curved
+:uri-sub: {user}#subscript-and-superscript
+:uri-mono: {user}#mono
+:uri-css: {user}#custom-styling-with-attributes
+:uri-pass: {user}#pass-macros
 :uri-mailinglist: http://discuss.asciidoctor.org
 :uri-char-xml: https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
 :uri-data-uri: https://developer.mozilla.org/en-US/docs/data_URIs
@@ -640,7 +645,7 @@ TIP: You can control the video settings using {uri-video}[additional attributes 
 
 == Source Code
 
-.Inline
+.Inline (monospace only)
 ----
 include::{includedir}/ex-text.adoc[tag=b-mono-code]
 ----
@@ -648,6 +653,16 @@ include::{includedir}/ex-text.adoc[tag=b-mono-code]
 [.result]
 ====
 include::{includedir}/ex-text.adoc[tag=b-mono-code]
+====
+
+.Inline (literal)
+----
+include::{includedir}/ex-pass.adoc[tag=backtick-plus]
+----
+
+[.result]
+====
+include::{includedir}/ex-pass.adoc[tag=backtick-plus]
 ====
 
 .Literal line
@@ -1073,7 +1088,7 @@ include::{includedir}/ex-ui.adoc[tag=key]
 include::{includedir}/ex-ui.adoc[tag=key]
 ====
 
-.Menu selections (inline +menu+ macro)
+.Menu selections (inline menu macro)
 ----
 include::{includedir}/ex-ui.adoc[tag=menu]
 ----
@@ -1083,7 +1098,7 @@ include::{includedir}/ex-ui.adoc[tag=menu]
 include::{includedir}/ex-ui.adoc[tag=menu]
 ====
 
-.Buttons (inline +btn+ macro)
+.Buttons (inline btn macro)
 ----
 include::{includedir}/ex-ui.adoc[tag=button]
 ----
@@ -1156,6 +1171,16 @@ include::{includedir}/ex-subs.adoc[tag=b-slash]
 include::{includedir}/ex-subs.adoc[tag=b-slash]
 ====
 
+.Passthrough ("`plus for passthrough`")
+----
+include::{includedir}/ex-pass.adoc[tag=plus]
+----
+
+[.result]
+====
+include::{includedir}/ex-pass.adoc[tag=plus]
+====
+
 ////
 .Double dollar
 ----
@@ -1168,7 +1193,7 @@ include::{includedir}/ex-pass.adoc[tag=b-dollar]
 ====
 ////
 
-.Triple plus and inline passthrough macro
+.Raw (triple plus and inline pass macro)
 ----
 include::{includedir}/ex-pass.adoc[tag=b-3p-macro]
 ----

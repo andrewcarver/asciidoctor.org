@@ -10,6 +10,7 @@ Asciidoctor supports several forms of the passthrough macro.
 inline macro:: An inline macro named `pass` that can be used to passthrough content.
 Supports an optional set of substitutions.
 +
+[source]
 ----
 pass:[content like #{variable} passed directly to the output] followed by normal content.
 
@@ -112,7 +113,7 @@ include::ex-pass.adoc[tag=dollar]
 include::ex-pass.adoc[tag=dollar]
 ====
 
-[[back-pass]]
+[#back-pass]
 .Backtick passthrough
 
 Content enclosed in a backtick passthrough is subject to <<user-manual#special-characters,special characters>> substition and displayed as monospace text.

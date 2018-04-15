@@ -43,7 +43,7 @@ If you installed {adr} using RubyGems, you have to tell the man command where to
 
 You can also view the manpage online at {uri-man}[asciidoctor(1)].
 
-To get help with the AsciiDoc syntax in {adr}, refer to the {uri-org}/docs/asciidoc-syntax-quick-reference/[AsciiDoc Syntax Quick Reference].
+To get help with the AsciiDoc syntax in {adr}, refer to the {uri-home}/docs/asciidoc-syntax-quick-reference/[AsciiDoc Syntax Quick Reference].
 
 ==== Configuration Files
 
@@ -155,7 +155,7 @@ See <<ifeval-directive>>.
 |One or more literal characters or \t for tab.
 |====
 
-[[migrate-deprecated]]
+[#migrate-deprecated]
 === Deleted and Deprecated Syntax and Attributes
 
 These are attributes that either no longer exist, work differently, or have better alternatives.
@@ -258,7 +258,7 @@ For all other text, {adr} tabs are fixed at 4 spaces by the CSS.
 See <<normalize-block-indentation>> for more detail.
 |====
 
-[[migrate-stylesheet]]
+[#migrate-stylesheet]
 === Default HTML Stylesheet
 
 You'll notice that the {adp} and {adr} stylesheets look quite different.
@@ -284,7 +284,7 @@ For block content, {adp} uses a `[latex]` style delimited block.
 In {adr}, use  a `stem` passthrough block instead.
 See <<stem-bl>>.
 
-[[migrate-extensions]]
+[#migrate-extensions]
 === {adp} Extensions
 
 The extension mechanism is completely different in {adr}, but the '`standard`' extensions have been re-implemented, so they should work with minor changes.
@@ -324,7 +324,7 @@ See <<setting-attributes-on-an-element>> for details.
 
 The following longhand syntax in {adp}:
 
-[source,asciidoc]
+[source]
 ----
 [[id]]
 [style,role="role",options="option1,option2"]
@@ -332,7 +332,7 @@ The following longhand syntax in {adp}:
 
 can be written using the shorthand supported by {adr}:
 
-[source,asciidoc]
+[source]
 ----
 [style#id.role%option1%option2]
 ----

@@ -121,6 +121,16 @@ task :deploy => [:push, :check] do
   run_awestruct '-P production --deploy'
 end
 
+namespace :deploy do
+desc 'Generate site from Netlify'
+task :netlify do
+  profile = ENV['CONTEXT'] || 'production'
+  reject_trailing_whitespace
+  # TODO set_pub_dates 'master'
+  url_opt = %( -u #{ENV['DEPLOY_PRIME_URL']}) unless profile == 'production'
+  run_awestruct %(-P #{profile}#{url_opt} -g --force -q), :spawn => false
+end
+
 desc 'Generate site from Travis CI and, if not a pull request, publish site to production (GitHub Pages)'
 task :travis do
   # force use of bundle exec in Travis environment
@@ -159,8 +169,9 @@ task :travis do
   File.delete '.git/credentials'
   system 'git status'
 end
+end
 
-desc "Assign publish dates to news entries"
+desc 'Assign publish dates to news entries'
 task :setpub do
   set_pub_dates 'master'
 end
@@ -219,15 +230,22 @@ end
 
 # Test rendered HTML files to make sure they’re accurate.
 def run_proofer
-  require 'html/proofer'
-  HTML::Proofer.new('./_site', {
-    # TODO: only ignore '/feed.atom', /^\/rdoc\// for local build
-    href_ignore: ['#', '/feed.atom', /^\/rdoc\//, /^irc:\//, /^\\\\/, /^http:\/\/www.amazon.com\/gp\/feature.html/],
-    ssl_verifypeer: true,
-    #parallel: {
-    #  in_processes: 1
-    #}
+  require 'html-proofer'
+  HTMLProofer.check_directory('./_site', {
+    allow_hash_href: true,
+    file_ignore: ['./_site/contributors/index.html', './_site/supporters/index.html'],
+    url_ignore: [/^\\\\/, /^https:\/\/(?:gist\.)?github\.com/, /^http:\/\/discuss\.asciidoctor\.org/],
+    # TIP pretty print cache using jq '.' ./cache/html-proofer/cache.log
+    cache: { timeframe: '2w', storage_dir: '.cache/html-proofer' },
   }).run
+end
+
+desc 'Validate site can be successfully built'
+task :pr do
+  # force use of bundle exec in Travis environment
+  $use_bundle_exec = true
+  reject_trailing_whitespace
+  run_awestruct '-P production -g --force', :spawn => false
 end
 
 task :lint do
@@ -239,8 +257,8 @@ def run_awestruct(args, opts = {})
   cmd = "#{$use_bundle_exec ? 'bundle exec ' : ''}awestruct #{args}"
   if RUBY_VERSION < '1.9'
     opts[:spawn] = false
-  else
-    opts[:spawn] ||= true
+  elsif !(opts.key? :spawn)
+    opts[:spawn] = true
   end
 
   if opts[:spawn]

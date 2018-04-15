@@ -22,43 +22,62 @@ Asciidoctor::Extensions.register do
     current_document.instance_variable_set :@base_dir, (File.dirname docfile)
   end
 
-  # workaround lack of support for nested remote includes in Asciidoctor
+  # workaround lack of support for nested remote includes in Asciidoctor (will be fixed in 1.5.7)
   include_processor do
     handles? do |target|
       current_document.reader.cursor.dir.start_with? 'https://'
     end
 
     process do |doc, reader, target, attrs|
-      inc_path = %(#{current_document.reader.cursor.dir}/#{target})
-      inc_contents = open(inc_path, 'r') {|f| f.read }
-      reader.push_include inc_contents, inc_path, target, 1, attrs
+      inc_path = %(#{reader.cursor.dir}/#{target})
+      begin
+        inc_contents = open(inc_path, 'r') {|f| f.read }
+        reader.push_include inc_contents, inc_path, target, 1, attrs
+      rescue
+        line_info = %(#{current_path = reader.path}: line #{reader.lineno - 1})
+        warn %(asciidoctor: ERROR: #{line_info}: include uri not readable: #{inc_path})
+        reader.restore_line %(Unresolved directive in #{current_path} - include::#{target}[])
+      end
     end
-  end unless current_document.options[:parse_header_only]
+  end unless current_document.options[:parse_header_only] || (Gem::Version.new Asciidoctor::VERSION) >= (Gem::Version.new '1.5.7')
 
   preprocessor do
     process do |doc, reader|
       # make the prewrap attribute overridable
       (doc.instance_variable_get :@attribute_overrides).delete 'prewrap'
+      if (outfilesuffix = doc.options[:attributes]['outfilesuffix']) && (outfilesuffix.end_with? '@')
+        # soft set the outfilesuffix (since soft setting from API has no effect)
+        doc.set_attr 'outfilesuffix', outfilesuffix.chop
+      end
       reader
     end
   end unless current_document.options[:parse_header_only]
 
+  # TODO rewrite this as a docinfo processor
   postprocessor do
     process do |doc, output|
       next output if (doc.attr? 'page-layout') || !(doc.attr? 'site-google_analytics_account')
       account_id = doc.attr 'site-google_analytics_account'
-      %(#{output.rstrip.chomp('</html>').rstrip.chomp('</body>').chomp}
+      output
+        .sub('</title>', %(</title>
+<script>!function(l,p){if(l.protocol!==p){l.protocol=p}else if(l.host=="asciidoctor.netlify.com"){l.host="asciidoctor.org"}}(location,"https:")</script>))
+        .rstrip.chomp('</html>').rstrip.chomp('</body>').chomp
+        .concat(%(
 <script>
 !function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);}(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','#{account_id}','auto'),ga('send','pageview');
 </script>
 </body>
-</html>)
+</html>))
     end
-  end unless ::Awestruct::Engine.instance.development?
+  end if ::Awestruct::Engine.instance.production?
 end
 
 module Awestruct
   class Engine
+    def production?
+      site.profile == 'production'
+    end
+
     def development?
       site.profile == 'development'
     end
