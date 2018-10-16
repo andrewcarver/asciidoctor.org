@@ -152,6 +152,12 @@ include::{includedir}/apply-theme.adoc[]
 
 Happy theming!
 
+== Additional themes for Asciidoctor
+
+The https://github.com/darshandsoni/asciidoctor-skins[asciidoctor-skins] repository has additional stylesheets that can be used to theme your AsciiDoc-based documentation.
+These stylesheets are specifically created for users who want to style their documents without having to dive into writing custom CSS.
+The stylesheets in asciidoctor-skins import the default stylesheet first, then overlay an alternate theme (in other words, a "`skin`").
+
 == Resources and help
 
 Now that you have applied a custom theme to your AsciiDoc document, you may want to learn more about the AsciiDoc syntax and the growing variety of integrations, backends, and customizations the Asciidoctor project is developing.

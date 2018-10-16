@@ -20,7 +20,6 @@ Sarah White <https://github.com/graphitefriction[@graphitefriction]>; Dan Allen 
 :sectanchors:
 :sectlinks:
 :sectnums:
-:linkattrs:
 :icons: font
 :source-highlighter: coderay
 :source-language: asciidoc
@@ -110,16 +109,19 @@ Sarah White <https://github.com/graphitefriction[@graphitefriction]>; Dan Allen 
 :uri-ad-org-issues: https://github.com/asciidoctor/asciidoctor.org/issues
 :uri-asciidoctorj: {uri-org}/asciidoctorj
 :uri-asciidoctorjs: {uri-org}/asciidoctor.js
-:uri-irc: irc://irc.freenode.org/#asciidoctor
+:uri-chat: https://gitter.im/asciidoctor/asciidoctor
 :uri-asciidoc-leveloffset: http://asciidoc.org/userguide.html#X90
 :uri-asciidoctor-pdf: https://github.com/asciidoctor/asciidoctor-pdf
 :uri-asciidoctor-pdf-readme: https://github.com/asciidoctor/asciidoctor-pdf/blob/master/README.adoc
 :uri-asciidoctor-pdf-theming-guide: http://gist.asciidoctor.org/?github-asciidoctor%2Fasciidoctor-pdf%2F%2Fdocs%2Ftheming-guide.adoc
+:uri-asciidoctor-htmlbook: https://github.com/oreillymedia/asciidoctor-htmlbook
+:uri-svg-editor: http://petercollingridge.appspot.com/svg-editor
+:uri-svgo: https://github.com/svg/svgo
 
 [NOTE]
 ====
 If you find errors or omissions in this document, please don't hesitate to {uri-ad-org-issues}[submit an issue or open a pull request] with a fix.
-We also encourage you to ask questions and discuss any aspects of the project on the {uri-mailinglist}[mailing list] or {uri-irc}[IRC].
+We also encourage you to ask questions and discuss any aspects of the project on the {uri-mailinglist}[mailing list] or in the {uri-chat}[chat room].
 New contributors are always welcome!
 ====
 
@@ -148,7 +150,7 @@ Asciidoctor also offers a modern, responsive theme based on {uri-foundation}[Fou
 
 === Compared to MarkDown
 
-include::{includedir}/asciidoc-vs-markdown.adoc[]
+include::asciidoc-vs-markdown.adoc[leveloffset=+2]
 
 = Quick Starts
 
@@ -162,6 +164,8 @@ include::{includedir}/command-line-usage.adoc[]
 == Using the Ruby API
 
 include::{includedir}/api-intro.adoc[]
+
+include::{includedir}/require-asciidoctor.adoc[]
 
 include::{includedir}/load-convert-api.adoc[]
 
@@ -434,7 +438,8 @@ is effectively the same as:
 
 This is important for being able to assign document attributes in places where attribute entry lines are not normally processed, such as in a table cell.
 
-==== Catch a Missing or Undefined Attribute
+[#handle-missing-or-undefined-attributes]
+==== Handle Missing or Undefined Attributes [[catch-a-missing-or-undefined-attribute]]
 
 include::{includedir}/attr-miss.adoc[]
 
@@ -515,6 +520,10 @@ include::{includedir}/sections.adoc[tag=autoid]
 === Custom IDs
 
 include::{includedir}/sections.adoc[tag=custom-id]
+
+=== Multiple Anchors
+
+include::{includedir}/sections.adoc[tag=multiple-anchors]
 
 === Links
 
@@ -615,7 +624,7 @@ include::{includedir}/o-list-nest.adoc[]
 
 include::{includedir}/o-list-num.adoc[]
 
-== Labeled List
+== Description List
 
 include::{includedir}/dlist.adoc[]
 
@@ -699,6 +708,10 @@ include::{includedir}/xref-anchor.adoc[]
 
 include::{includedir}/xref.adoc[]
 
+=== Validating Internal Cross References
+
+include::{includedir}/xref-validate.adoc[]
+
 === Customizing the Cross Reference Text
 
 include::{includedir}/xrefstyle.adoc[]
@@ -736,7 +749,7 @@ include::{includedir}/image.adoc[]
 
 === Setting the Location of Images
 
-include::{includedir}/image-dir.adoc[]
+include::{includedir}/imagesdir.adoc[]
 
 ==== Include Images by Full URL
 
@@ -749,6 +762,10 @@ include::{includedir}/image-position.adoc[]
 === Sizing Images
 
 include::{includedir}/image-sizing.adoc[]
+
+=== Taming SVGs
+
+include::{includedir}/image-svg.adoc[]
 
 === Summary
 
@@ -1161,13 +1178,23 @@ AsciiDoc is a plugin for https://github.com/guard/guard[Guard] that converts wat
 
 Instructions for using the Guard/Live viewer are documented in the project's {guard-doc-ref}[README].
 
-== Process Multiple Source Files from the CLI
+== CLI Inputs and Outputs
+
+So far, you've seen how to pass a single input file to the CLI for it to convert.
+You can also convert multiple files at once, read content from STDIN, write content to STDOUT, or write content to a different output file or directory.
+This section explains the various input and output options of the CLI.
+
+=== Process Multiple Source Files from the CLI
 
 include::{includedir}/process-multi.adoc[]
 
-== Specifying an Output File
+=== Specifying an Output File
 
 include::{includedir}/file-output.adoc[]
+
+=== Piping Content Through the CLI
+
+include::{includedir}/io-piping.adoc[]
 
 == Running Asciidoctor Securely
 
@@ -1194,13 +1221,7 @@ The Asciidoctor project includes alternative stylesheet themes from <<stylesheet
 You can also create your own <<custom-themes,themes>> and <<custom-backends,backends>>.
 --
 
-== Custom Themes
-
-=== Creating a Theme
-
-include::{includedir}/create-theme.adoc[]
-
-=== Applying a Theme
+== Applying a Theme
 
 include::{includedir}/apply-theme.adoc[]
 
@@ -1219,6 +1240,10 @@ include::{includedir}/factory-setup.adoc[tag=gem]
 ==== Build the Stylesheets
 
 include::{includedir}/factory-setup.adoc[tag=build]
+
+=== Creating a Theme
+
+include::{includedir}/create-theme.adoc[]
 
 === Applying a Stylesheet
 
@@ -1291,12 +1316,16 @@ include::{includedir}/static-awe.adoc[]
 include::{includedir}/api-intro.adoc[]
 --
 
+== Require the Library
+
+include::{includedir}/require-asciidoctor.adoc[]
+
 // FIXME this section is included twice in the manual
-== Load and Convert a File Using the API
+== Load and Convert Files
 
 include::{includedir}/load-convert-api.adoc[]
 
-=== Convert Strings
+== Load and Convert Strings
 
 include::{includedir}/string-api.adoc[]
 

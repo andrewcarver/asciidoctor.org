@@ -27,6 +27,7 @@ head
     - else
       meta name='twitter:description' content=summarize(html_to_text(page.content).strip.gsub(/^[:space:]*\n/, ''), 25)
     meta name='twitter:url' content="#{site.base_url}#{page.url}"
+  link rel='icon' href='/favicon.ico' type='image/x-icon'
 body.antialiased
   nav.top-bar
     ul.title-area
@@ -95,8 +96,9 @@ body.antialiased
 
   script
     |document.write('<script src=' + ('__proto__' in {} ? '/javascripts/vendor/zepto' : '/javascripts/vendor/jquery') + '.js><\/script>')
-  script
-    |$('.toggle-navigation').click(function() { $('.navigation').toggle(); $('.content').toggleClass('large-8'); $('.content').toggleClass('large-12'); $('.toolbar').toggleClass('off'); });
+  - if page.layout == 'docs'
+    script
+      |$('.toggle-navigation').click(function() { $('.navigation').toggle(); $('.content').toggleClass('large-8'); $('.content').toggleClass('large-12'); $(this).toggleClass('off').blur(); });
   script src='/javascripts/foundation/foundation.js'
   - [:topbar].each do |component|
     script src="/javascripts/foundation/foundation.#{component}.js"
@@ -130,7 +132,7 @@ body.antialiased
       |  },
       |  TeX: { equationNumbers: { autoNumber: "none" } }
       |});
-    script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML"
   / custom built highlight.js from https://github.com/isagalaev/highlight.js using:
   / python3 tools/build.py xml javascript java ruby asciidoc
   /script src='/javascripts/vendor/highlight.min.js'

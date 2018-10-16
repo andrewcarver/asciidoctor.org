@@ -18,7 +18,6 @@ ifndef::env-site[]
 :idseparator: -
 :toc: macro
 endif::[]
-:linkattrs:
 // URLs
 :docs: link:../
 ifdef::env-github[:docs: https://asciidoctor.org/docs/]
@@ -57,7 +56,7 @@ Syntax to cover:
 - index terms
 - built-in attributes (such as {author}, {revision}, etc)
 - start=n for ordered lists
-- horizontal labeled list
+- horizontal description list
 - anchor for any block element
 - block metadata (missing example of normal attributes)
 - command line reference? perhaps another doc? yes
@@ -164,6 +163,20 @@ include::{includedir}/ex-text.adoc[tag=b-bold-italic-mono]
 ====
 include::{includedir}/ex-text.adoc[tag=b-bold-italic-mono]
 ====
+
+.Monospace vs codespan
+----
+include::{includedir}/ex-text.adoc[tag=monospace-vs-codespan]
+----
+
+[.result]
+====
+include::{includedir}/ex-text.adoc[tag=monospace-vs-codespan]
+====
+
+NOTE: The meaning of backtick (`pass:[`]`) and plus (`+`) changed in Asciidoctor 1.5.0.
+Backticks only make the text monospaced, whereas pluses passthrough text without applying formatting.
+See the <<migration.adoc#,migration page>> for details.
 
 .Marks and Custom Styling
 ----
@@ -412,7 +425,7 @@ include::{includedir}/ex-ulist.adoc[tag=check]
 
 TIP: Checklists can use {uri-checklist}[font-based icons and be interactive].
 
-.Labeled, single-line
+.Description, single-line
 ----
 include::{includedir}/ex-dlist.adoc[tag=b-base]
 ----
@@ -422,7 +435,7 @@ include::{includedir}/ex-dlist.adoc[tag=b-base]
 include::{includedir}/ex-dlist.adoc[tag=b-base]
 ====
 
-.Labeled, multi-line
+.Description, multi-line
 ----
 include::{includedir}/ex-dlist.adoc[tag=b-base-multi]
 ----
@@ -1157,7 +1170,7 @@ include::{includedir}/ex-counter.adoc[tag=base]
 // Table of text replacements performed during replacements substitution
 include::{includedir}/subs-symbol-repl.adoc[]
 
-TIP: Any named, numeric or hex {uri-char-xml}[XML entity reference] is supported.
+TIP: Any named, numeric or hexadecimal {uri-char-xml}[XML character reference] is supported.
 
 == Escaping Text
 
@@ -1227,7 +1240,7 @@ include::{includedir}/ex-toc.adoc[tag=base]
 include::{includedir}/ex-toc.adoc[tag=pos]
 ----
 
-TIP: The ToC {uri-toc}["title, levels, and positioning"] can be customized.
+TIP: The ToC {uri-toc}[title, levels, and positioning] can be customized.
 
 == Bibliography
 
