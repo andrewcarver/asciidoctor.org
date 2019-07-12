@@ -59,6 +59,22 @@ include::ex-stem.adoc[tag=in-co]
 ====
 include::ex-stem.adoc[tag=in]
 ====
+
+If the inline stem equation contains a right square bracket, you must escape this character using a backslash.
+
+.Inline stem macro with a right square bracket
+[source]
+----
+include::ex-stem.adoc[tag=in-sb]
+----
+
+.Rendered inline stem macro with a right square bracket
+====
+include::ex-stem.adoc[tag=in-sb]
+====
+
+A stem macro is an implicit passthrough macro.
+That's why, despite the fact that the x expression matches the syntax of an attribute reference, you don't have to escape it.
 // end::in[]
 
 === Block stem content
@@ -145,8 +161,8 @@ Instead, you can convert the DocBook to PDF using the dblatex pipeline, which ob
 Since it's just a pass through block wrapped in a dedicated template (HTML and DocBook) and a JavaScript library in HTML, it shouldn't be too hard to implement.
 
 * [LaTeXMathML](https://www.maths.nottingham.ac.uk/personal/drw/lm.html)
-* [AsciiMathML](http://www1.chapman.edu/~jipsen/mathml/asciimath.html)
-* [MathJax](http://www.mathjax.org)
+* [AsciiMathML](https://www1.chapman.edu/~jipsen/mathml/asciimath.html)
+* [MathJax](https://www.mathjax.org)
 
 
 Inline delimited (implemented)

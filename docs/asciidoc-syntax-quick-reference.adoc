@@ -27,7 +27,7 @@ ifdef::env-browser[]
 :user: link:user-manual.adoc
 endif::[]
 :uri-config: https://github.com/asciidoctor/asciidoctor/blob/master/compat/asciidoc.conf
-:uri-fontawesome: http://fortawesome.github.io/Font-Awesome/
+:uri-fontawesome: https://fontawesome.com/v4.7.0/
 :uri-icon-in: {user}#inline-icons
 :uri-icon-attrs: {user}#size-rotate-and-flip
 :uri-video: {user}#video
@@ -97,16 +97,6 @@ include::{includedir}/ex-text.adoc[tag=b-para]
 [.result]
 ====
 include::{includedir}/ex-text.adoc[tag=b-para]
-====
-
-.Line breaks
-----
-include::{includedir}/ex-text.adoc[tag=hb-all]
-----
-
-[.result]
-====
-include::{includedir}/ex-text.adoc[tag=hb-all]
 ====
 
 .Literal
@@ -283,7 +273,7 @@ include::{includedir}/ex-section.adoc[tag=b-book]
 IMPORTANT: There are two other ways to define a section title.
 _Their omission is intentional_.
 They both require more markup and are therefore unnecessary.
-The http://en.wikipedia.org/wiki/Setext[setext] title syntax (underlined text) is especially wasteful, hard to remember, hard to maintain and error prone.
+The https://en.wikipedia.org/wiki/Setext[setext] title syntax (underlined text) is especially wasteful, hard to remember, hard to maintain and error prone.
 The reader never sees the extra markup, so why type it?
 *Be frugal!*
 ////
@@ -323,16 +313,26 @@ include::{includedir}/ex-include.adoc[tag=uri]
 NOTE: Including content from a URI is potentially dangerous, so it's disabled if the safe mode is SECURE or greater.
 Assuming the safe mode is less than SECURE, you must also set the `allow-uri-read` attribute to permit Asciidoctor to read content from a URI.
 
-== Horizontal Rules and Page Breaks
+== Breaks
 
-.Horizontal rule
+.Hard line break
 ----
-include::{includedir}/ex-hr.adoc[tag=base]
+include::{includedir}/ex-text.adoc[tag=hb-all]
 ----
 
 [.result]
 ====
-include::{includedir}/ex-hr.adoc[tag=base]
+include::{includedir}/ex-text.adoc[tag=hb-all]
+====
+
+.Thematic break (aka horizontal rule)
+----
+include::{includedir}/ex-hr.adoc[tag=in-between]
+----
+
+[.result]
+====
+include::{includedir}/ex-hr.adoc[tag=in-between]
 ====
 
 .Page break
@@ -541,8 +541,9 @@ include::{includedir}/ex-url.adoc[tag=b-linkattrs]
 ====
 
 NOTE: Links with attributes (including the subject and body segments on mailto links) are a feature unique to Asciidoctor.
-To enable them, you must set the `linkattrs` attribute on the document.
-When they are enabled, you must quote the link text if it contains a comma.
+To enable them prior to 1.5.7, you must set the `linkattrs` attribute on the document.
+Since 1.5.7, attribute parsing is enabled automatically if an equal sign follows a comma.
+When attribute parsing is enabled, you must quote the link text if it contains a comma.
 
 .Inline anchors
 ----

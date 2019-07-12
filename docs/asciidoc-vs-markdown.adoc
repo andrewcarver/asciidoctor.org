@@ -49,7 +49,7 @@ That's why mapping to an enterprise documentation format like DocBook remains a 
 
 And yet, AsciiDoc is simple enough to stand in as a better flavor of Markdown.
 But what truly makes AsciiDoc the right investment is that its syntax was designed to be extended as a core feature.
-This extensibility not only means that AsciiDoc has a more to offer, with room to grow, it also fulfills the objective of ensuring your content is maximally reusable.
+This extensibility not only means that AsciiDoc has a lot more to offer, with room to grow, it also fulfills the objective of ensuring your content is maximally reusable.
 
 // This section originated from the discussion in {uri-org}/asciidoctor.org/issues/34[issue #34].
 
@@ -319,8 +319,8 @@ a|
 ----
 * apples
 * oranges
- ** temple
- ** navel
+** temple
+** navel
 * bananas
 ----
 |Ordered list
@@ -367,7 +367,7 @@ a|
 [source,asciidoc]
 ----
 The `'90s popularized a new form of music known as "`grunge`" rock.
-It's influence extended well beyond music.
+Its influence extended well beyond music.
 ----
 
 |Document header
@@ -405,18 +405,24 @@ TIP: You can add line numbers to source listings by adding the word `numbered` i
 |Sidebars
 |_n/a_
 a|
+[source,asciidoc]
+----
 .Lightweight Markup
 ****
 Writing languages that let you type less and express more.
 ****
+----
 
 |Block titles
 |_n/a_
 a|
+[source,asciidoc]
+----
 .Grocery list
 * Milk
 * Eggs
 * Bread
+----
 
 |Includes
 |_n/a_
@@ -430,9 +436,9 @@ a|
 a|
 [source,markdown]
 ----
-[home]: https://example.org "Home"
+Go [Home][home].
 
-Go [home].
+[home]: https://example.org
 ----
 a|
 [source,asciidoc]
